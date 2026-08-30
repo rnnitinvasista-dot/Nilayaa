@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "brightroute-e2439"
+  },
+  "targets": {
+    "brightroute-e2439": {
+      "hosting": {
+        "nilayaa": [
+          "nilayaa-interiors"
+        ]
+      }
+    }
+  }
+}
