@@ -344,11 +344,6 @@ pfBtns.forEach(btn => {
   });
 
   // Lock & scroll
-  document.getElementById('btn-lock')?.addEventListener('click', () => {
-    gsap.to(window, { scrollTo: '#contact-section', duration: 1.2, ease: 'power3.inOut' });
-    showToast('Redirecting to booking form…');
-  });
-
   recalc();
 })();
 
@@ -379,18 +374,6 @@ document.getElementById('consultation-form')?.addEventListener('submit', e => {
   e.preventDefault();
   showToast('Request sent! Our architect will contact you within 2 hours.');
   e.target.reset();
-});
-
-// ================================================================
-// GSAP SCROLL ANIMATIONS (100% visible elements, subtle motion only)
-// ================================================================
-gsap.utils.toArray('.fact-cell, .proc-step').forEach((el, i) => {
-  gsap.from(el, {
-    y: 20, duration: 0.6,
-    delay: (i % 4) * 0.08,
-    ease: 'power2.out',
-    scrollTrigger: { trigger: el, start: 'top 92%', toggleActions: 'play none none none' }
-  });
 });
 
 // ================================================================
