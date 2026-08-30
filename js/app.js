@@ -63,12 +63,21 @@ hambBtn?.addEventListener('click', () => mobileMenu.classList.toggle('open'));
 document.querySelectorAll('.mob-link').forEach(a => a.addEventListener('click', () => mobileMenu.classList.remove('open')));
 
 // ================================================================
-// HERO PHOTO SLIDER (CSS transitions only — no WebGL)
+// HERO PHOTO BACKGROUND SLIDER (Dual-layer seamless crossfade)
 // ================================================================
-const heroSlides = document.querySelectorAll('.hero-slide');
-const heroSlidesWrap = document.getElementById('hero-slides');
+const HERO_PHOTOS = [
+  'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1400&q=80',
+  'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=1400&q=80',
+  'https://images.unsplash.com/photo-1618219908412-a29a1bb7b86e?auto=format&fit=crop&w=1400&q=80',
+  'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1400&q=80'
+];
+
+// Preload all photos into memory immediately
+HERO_PHOTOS.forEach(src => { const img = new Image(); img.src = src; });
+
+const bg1 = document.getElementById('hero-bg-1');
+const bg2 = document.getElementById('hero-bg-2');
 const heroDots = document.querySelectorAll('.slide-dot');
-const heroWord = document.getElementById('hero-word');
 const heroStatN = document.getElementById('hero-stat-n');
 const heroStatL = document.getElementById('hero-stat-l');
 
@@ -79,50 +88,52 @@ const ROOM_DATA = [
   { word: 'clarity',   n: '100%', l: 'On-Time Delivery' },
 ];
 
-let currentSlide = 0;
-let autoSlideTimer = null;
+let currentPhotoIdx = 0;
+let activeBgLayer = 1;
+let autoPhotoTimer = null;
 
-function goToSlide(idx) {
-  currentSlide = idx;
-  // Crossfade slides with opacity (zero horizontal translateX movement)
-  heroSlides.forEach((s, i) => s.classList.toggle('active', i === idx));
+function cycleHeroPhoto(nextIdx) {
+  currentPhotoIdx = (nextIdx + HERO_PHOTOS.length) % HERO_PHOTOS.length;
+  const nextUrl = HERO_PHOTOS[currentPhotoIdx];
 
-  // Dots
-  heroDots.forEach((d, i) => d.classList.toggle('active', i === idx));
+  if (activeBgLayer === 1) {
+    if (bg2) {
+      bg2.style.backgroundImage = `url('${nextUrl}')`;
+      bg2.style.opacity = '1';
+    }
+    if (bg1) bg1.style.opacity = '0';
+    activeBgLayer = 2;
+  } else {
+    if (bg1) {
+      bg1.style.backgroundImage = `url('${nextUrl}')`;
+      bg1.style.opacity = '1';
+    }
+    if (bg2) bg2.style.opacity = '0';
+    activeBgLayer = 1;
+  }
 
-  // Update stats
-  const rd = ROOM_DATA[idx];
+  // Update dots & stats
+  heroDots.forEach((d, i) => d.classList.toggle('active', i === currentPhotoIdx));
+  const rd = ROOM_DATA[currentPhotoIdx];
   if (heroStatN) heroStatN.textContent = rd.n;
   if (heroStatL) heroStatL.textContent = rd.l;
 }
 
-function startAutoSlide() {
-  clearInterval(autoSlideTimer);
-  autoSlideTimer = setInterval(() => {
-    goToSlide((currentSlide + 1) % heroSlides.length);
+function startPhotoLoop() {
+  clearInterval(autoPhotoTimer);
+  autoPhotoTimer = setInterval(() => {
+    cycleHeroPhoto(currentPhotoIdx + 1);
   }, 6000);
 }
 
 heroDots.forEach(dot => {
   dot.addEventListener('click', () => {
-    goToSlide(parseInt(dot.dataset.slide));
-    startAutoSlide();
+    cycleHeroPhoto(parseInt(dot.dataset.slide));
+    startPhotoLoop();
   });
 });
 
-// Touch swipe on hero
-let heroTouchX = 0;
-const heroEl = document.getElementById('hero');
-heroEl?.addEventListener('touchstart', e => { heroTouchX = e.touches[0].clientX; }, { passive: true });
-heroEl?.addEventListener('touchend', e => {
-  const diff = heroTouchX - e.changedTouches[0].clientX;
-  if (Math.abs(diff) > 50) {
-    goToSlide(diff > 0 ? (currentSlide + 1) % heroSlides.length : (currentSlide - 1 + heroSlides.length) % heroSlides.length);
-    startAutoSlide();
-  }
-}, { passive: true });
-
-startAutoSlide();
+startPhotoLoop();
 
 // ================================================================
 // GALLERY — STICKY HORIZONTAL SCROLL (CSS translateX, no WebGL)
