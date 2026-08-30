@@ -92,16 +92,13 @@ let autoSlideTimer = null;
 
 function goToSlide(idx) {
   currentSlide = idx;
-  // Translate slides strip
-  heroSlidesWrap.style.transform = `translateX(-${idx * 100}vw)`;
-
-  // Mark active for ken-burns
+  // Crossfade slides with opacity (zero horizontal translateX movement)
   heroSlides.forEach((s, i) => s.classList.toggle('active', i === idx));
 
   // Dots
   heroDots.forEach((d, i) => d.classList.toggle('active', i === idx));
 
-  // Update stats without fading title text
+  // Update stats
   const rd = ROOM_DATA[idx];
   if (heroStatN) heroStatN.textContent = rd.n;
   if (heroStatL) heroStatL.textContent = rd.l;
@@ -250,7 +247,7 @@ setTimeout(() => document.querySelector('.acc-header')?.click(), 500);
     if (handleBtn) handleBtn.style.left = pct + '%';
   }
 
-  slider.addEventListener('mousedown', e => { dragging = true; setPos(e.clientX); });
+  slider.addEventListener('mousedown', e => { e.preventDefault(); dragging = true; setPos(e.clientX); });
   window.addEventListener('mousemove', e => { if (dragging) setPos(e.clientX); });
   window.addEventListener('mouseup', () => { dragging = false; });
   slider.addEventListener('touchstart', e => { dragging = true; setPos(e.touches[0].clientX); }, { passive: true });
