@@ -137,50 +137,7 @@ startAutoSlide();
 
 // ================================================================
 // GALLERY — STICKY HORIZONTAL SCROLL (CSS translateX, no WebGL)
-// ================================================================
-const gallerySection = document.getElementById('gallery-section');
-const galleryTrack = document.getElementById('gallery-track');
-const galProgressFill = document.getElementById('gallery-prog-fill');
-const galCounter = document.getElementById('gallery-counter');
-const galActiveName = document.getElementById('gallery-active-name');
-
-const GALLERY_NAMES = [
-  'Living Lounge Pavilion',
-  'Gourmet Kitchen Island',
-  'Master Penthouse Suite',
-  'Executive Office Library',
-];
-
-let lastGalRoom = -1;
-
-ScrollTrigger.create({
-  trigger: gallerySection,
-  start: 'top top',
-  end: 'bottom bottom',
-  pin: '#gallery-sticky',
-  scrub: true,
-  onUpdate: self => {
-    const prog = self.progress;
-    const n = GALLERY_NAMES.length;
-    const room = Math.min(Math.floor(prog * n), n - 1);
-    const tx = -prog * (100 * (n - 1));
-
-    galleryTrack.style.transform = `translateX(${tx}vw)`;
-    galProgressFill.style.width = `${Math.round(prog * 100)}%`;
-    galCounter.textContent = `0${room + 1} / 0${n}`;
-
-    if (room !== lastGalRoom) {
-      lastGalRoom = room;
-      gsap.to(galActiveName, {
-        opacity: 0, y: -6, duration: 0.2,
-        onComplete: () => {
-          galActiveName.textContent = GALLERY_NAMES[room];
-          gsap.to(galActiveName, { opacity: 1, y: 0, duration: 0.3 });
-        }
-      });
-    }
-  }
-});
+// Gallery vertical showcase — normal scroll flow
 
 // ================================================================
 // 3D CONFIGURATOR — ON-DEMAND (lazy init)

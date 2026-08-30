@@ -424,52 +424,27 @@
     .fact-lbl { font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ash-dk); margin-top: 6px; }
 
     /* =========================================================
-       PHOTO GALLERY — HORIZONTAL STICKY SCROLL
+       PHOTO GALLERY — VERTICAL RESPONSIVE SHOWCASE
        ========================================================= */
     .gallery-wrap { background: var(--ink); }
-    .gallery-section { height: 500vh; position: relative; }
-    .gallery-sticky {
-      position: sticky; top: 0; height: 100vh;
-      display: flex; flex-direction: column; overflow: hidden;
-    }
-    .gallery-topbar {
-      padding: 28px 48px; flex-shrink: 0;
-      display: flex; align-items: center; justify-content: space-between;
-      background: linear-gradient(to bottom, rgba(10,8,6,0.65) 0%, transparent 100%);
-      z-index: 5;
-    }
-    @media(max-width:768px) { .gallery-topbar { padding: 20px 20px; } }
-    .gallery-active-name {
-      font-family: var(--ff-serif);
-      font-size: 1.1rem; font-weight: 400; color: #f5f2ec;
-    }
-    .gallery-meta { display: flex; align-items: center; gap: 20px; }
-    .gallery-prog-bar { width: 140px; height: 1px; background: rgba(28,26,22,0.15); position: relative; }
-    .gallery-prog-fill { position: absolute; top: 0; left: 0; height: 100%; background: var(--gold); transition: width 0.08s linear; }
-    .gallery-counter { font-family: var(--ff-serif); font-size: 0.9rem; color: var(--ash); }
-    .xray-pill {
-      display: none; align-items: center; gap: 8px;
-      padding: 5px 14px;
-      border: 1px solid rgba(0,229,255,0.5);
-      font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase;
-      color: #00e5ff;
-      animation: xrayPulse 1.6s infinite;
-    }
-    .xray-pill.on { display: flex; }
-    @keyframes xrayPulse { 0%,100%{opacity:0.7} 50%{opacity:1} }
-
-    .gallery-viewport { flex: 1; position: relative; overflow: hidden; }
-    .gallery-track {
-      display: flex; height: 100%;
-      transition: transform 0.08s linear;
-      will-change: transform;
-    }
+    .gallery-section { padding: 110px 0; background: var(--ink); }
+    .gallery-title-head { margin-bottom: 44px; }
+    .gallery-cards { display: flex; flex-direction: column; gap: 40px; }
     .gallery-panel {
-      flex-shrink: 0; width: 100vw; height: 100%;
-      position: relative; overflow: hidden;
+      position: relative; border-radius: 4px; overflow: hidden;
+      aspect-ratio: 16/9; border: 1px solid var(--ink-4);
+      background: var(--ink-2); width: 100%;
+    }
+    @media(max-width:768px) {
+      .gallery-section { padding: 60px 0; }
+      .gallery-panel { aspect-ratio: 4/3; }
+      .panel-hud { align-items: flex-start; }
+      .hud-row { flex-wrap: wrap; }
+    }
+    @media(max-width:480px) {
+      .gallery-panel { aspect-ratio: 1/1; }
     }
 
-    /* REAL PHOTO in each gallery panel */
     .gallery-panel-img {
       position: absolute; inset: 0;
       width: 100%; height: 100%;
@@ -477,15 +452,13 @@
       transition: transform 0.6s ease-out;
     }
 
-    /* Overlay gradient */
     .gallery-panel::after {
       content: '';
       position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(6,6,8,0.92) 0%, rgba(6,6,8,0.25) 50%, rgba(6,6,8,0.1) 100%);
+      background: linear-gradient(to top, rgba(6,6,8,0.92) 0%, rgba(6,6,8,0.2) 65%);
       pointer-events: none;
     }
 
-    /* 3D CONFIGURATOR overlay on first panel */
     #configurator-canvas-wrap {
       position: absolute; inset: 0; z-index: 3;
       pointer-events: none;
@@ -503,28 +476,28 @@
 
     .gallery-panel-info {
       position: absolute; bottom: 0; left: 0; width: 100%;
-      padding: 36px 48px; z-index: 5;
+      padding: 36px 44px; z-index: 5;
       display: flex; align-items: flex-end; justify-content: space-between;
     }
-    @media(max-width:768px) { .gallery-panel-info { padding: 24px 20px; flex-direction: column; align-items: flex-start; gap: 16px; } }
-    .panel-title-block {}
+    @media(max-width:768px) {
+      .gallery-panel-info { padding: 20px 18px; flex-direction: column; align-items: flex-start; gap: 14px; }
+    }
     .panel-room-title {
       font-family: var(--ff-serif);
-      font-size: clamp(2rem, 3.5vw, 3.4rem); font-weight: 300; color: #f5f2ec; line-height: 1.1;
+      font-size: clamp(1.8rem, 3.5vw, 3.2rem); font-weight: 300; color: #f5f2ec; line-height: 1.1;
     }
-    .panel-room-sub { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-lt); margin-top: 6px; }
+    .panel-room-sub { font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold-lt); margin-top: 5px; }
 
-    /* HUD controls in gallery */
-    .panel-hud { display: flex; flex-direction: column; align-items: flex-end; gap: 12px; }
+    .panel-hud { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
     .hud-row { display: flex; gap: 6px; }
     .hud-pill {
-      background: rgba(10,8,6,0.72); border: 1px solid rgba(255,255,255,0.18);
-      padding: 7px 16px; font-size: 0.66rem; letter-spacing: 0.14em; text-transform: uppercase;
-      color: rgba(255,255,255,0.75); cursor: pointer; backdrop-filter: blur(10px);
+      background: rgba(10,8,6,0.78); border: 1px solid rgba(255,255,255,0.2);
+      padding: 7px 16px; font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase;
+      color: rgba(255,255,255,0.85); cursor: pointer; backdrop-filter: blur(10px);
       transition: all 0.3s;
     }
-    .hud-pill:hover, .hud-pill.active { border-color: var(--gold); color: var(--gold); background: rgba(181,137,42,0.18); }
-    .hud-pill.xray-active { border-color: #00e5ff; color: #00e5ff; background: rgba(0,229,255,0.1); }
+    .hud-pill:hover, .hud-pill.active { border-color: var(--gold); color: var(--gold); background: rgba(181,137,42,0.2); }
+    .hud-pill.xray-active { border-color: #00e5ff; color: #00e5ff; background: rgba(0,229,255,0.12); }
 
     /* =========================================================
        SERVICES — ACCORDION
@@ -1064,130 +1037,118 @@
   </div>
 </section>
 
-<!-- ================================================================ SPATIAL GALLERY — REAL PHOTOS + ONE 3D CONFIGURATOR -->
-<section class="gallery-section" id="gallery-section" style="height:500vh;">
-  <div class="gallery-sticky" id="gallery-sticky">
-
-    <div class="gallery-topbar">
-      <h2 class="gallery-active-name serif" id="gallery-active-name">Living Lounge Pavilion</h2>
-      <div class="gallery-meta">
-        <div class="xray-pill" id="xray-pill">
-          <span style="width:6px;height:6px;border-radius:50%;background:#00e5ff;display:inline-block;animation:xrayPulse 1.4s infinite;"></span>
-          X-RAY WIREFRAME
-        </div>
-        <div class="gallery-prog-bar"><div class="gallery-prog-fill" id="gallery-prog-fill"></div></div>
-        <span class="gallery-counter serif" id="gallery-counter">01 / 04</span>
-      </div>
+<!-- ================================================================ SPATIAL GALLERY — VERTICAL SHOWCASE -->
+<section class="gallery-section" id="gallery-section">
+  <div class="container">
+    <div class="gallery-title-head">
+      <div class="section-label">Architectural Spaces</div>
+      <h2 class="section-title">Bespoke <em>Sanctuaries</em></h2>
     </div>
 
-    <div class="gallery-viewport">
-      <div class="gallery-track" id="gallery-track">
+    <div class="gallery-cards">
+      <!-- Panel 1: Living — Real Photo + optional 3D overlay -->
+      <div class="gallery-panel" id="gp-0">
+        <img class="gallery-panel-img"
+          src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1920&q=80"
+          alt="Nilayaa Living Lounge — Italian marble, bouclé, brass chandelier"
+          loading="eager"
+        />
 
-        <!-- Panel 1: Living — Real Photo + optional 3D overlay -->
-        <div class="gallery-panel" id="gp-0">
-          <img class="gallery-panel-img"
-            src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1920&q=80"
-            alt="Nilayaa Living Lounge — Italian marble, bouclé, brass chandelier"
-            loading="eager"
-          />
+        <!-- 3D Configurator Canvas Overlay (only on panel 0) -->
+        <div id="configurator-canvas-wrap">
+          <canvas id="configurator-canvas"></canvas>
+        </div>
 
-          <!-- 3D Configurator Canvas Overlay (only on panel 0) -->
-          <div id="configurator-canvas-wrap">
-            <canvas id="configurator-canvas"></canvas>
+        <div class="gallery-panel-info">
+          <div class="panel-title-block">
+            <div class="panel-room-title">Living Lounge Pavilion</div>
+            <div class="panel-room-sub">Calacatta Gold Marble · Bouclé Sectional · Brass Chandelier</div>
           </div>
-
-          <div class="gallery-panel-info">
-            <div class="panel-title-block">
-              <div class="panel-room-title">Living Lounge Pavilion</div>
-              <div class="panel-room-sub">Calacatta Gold Marble · Bouclé Sectional · Brass Chandelier</div>
+          <div class="panel-hud">
+            <div class="xray-pill" id="xray-pill-2">
+              <span style="width:6px;height:6px;border-radius:50%;background:#00e5ff;display:inline-block;"></span>
+              X-RAY ACTIVE
             </div>
-            <div class="panel-hud">
-              <div class="xray-pill" id="xray-pill-2">
-                <span style="width:6px;height:6px;border-radius:50%;background:#00e5ff;display:inline-block;"></span>
-                X-RAY ACTIVE
-              </div>
-              <div class="hud-row">
-                <button class="hud-pill active" data-light="day">☀ Day</button>
-                <button class="hud-pill" data-light="sunset">🌅 Sunset</button>
-                <button class="hud-pill" data-light="night">🌙 Night</button>
-              </div>
-              <div class="hud-row">
-                <button class="hud-pill" id="btn-3d-toggle">⬡ Enter 3D Mode</button>
-                <button class="hud-pill" id="btn-xray-toggle">📐 Blueprint</button>
-              </div>
+            <div class="hud-row">
+              <button class="hud-pill active" data-light="day">☀ Day</button>
+              <button class="hud-pill" data-light="sunset">🌅 Sunset</button>
+              <button class="hud-pill" data-light="night">🌙 Night</button>
+            </div>
+            <div class="hud-row">
+              <button class="hud-pill" id="btn-3d-toggle">⬡ Enter 3D Mode</button>
+              <button class="hud-pill" id="btn-xray-toggle">📐 Blueprint</button>
             </div>
           </div>
         </div>
+      </div>
 
-        <!-- Panel 2: Kitchen — Real Photo -->
-        <div class="gallery-panel" id="gp-1">
-          <img class="gallery-panel-img"
-            src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=1920&q=80"
-            alt="Nilayaa Gourmet Kitchen Island — quartz waterfall, brass pendants"
-            loading="lazy"
-          />
-          <div class="gallery-panel-info">
-            <div class="panel-title-block">
-              <div class="panel-room-title">Gourmet Kitchen Island</div>
-              <div class="panel-room-sub">Quartz Waterfall · Matte Acrylic · Triple Brass Pendants</div>
-            </div>
-            <div class="panel-hud">
-              <div class="hud-row">
-                <button class="hud-pill active" data-light="day">☀ Day</button>
-                <button class="hud-pill" data-light="sunset">🌅 Sunset</button>
-                <button class="hud-pill" data-light="night">🌙 Night</button>
-              </div>
+      <!-- Panel 2: Kitchen — Real Photo -->
+      <div class="gallery-panel" id="gp-1">
+        <img class="gallery-panel-img"
+          src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=1920&q=80"
+          alt="Nilayaa Gourmet Kitchen Island — quartz waterfall, brass pendants"
+          loading="lazy"
+        />
+        <div class="gallery-panel-info">
+          <div class="panel-title-block">
+            <div class="panel-room-title">Gourmet Kitchen Island</div>
+            <div class="panel-room-sub">Quartz Waterfall · Matte Acrylic · Triple Brass Pendants</div>
+          </div>
+          <div class="panel-hud">
+            <div class="hud-row">
+              <button class="hud-pill active" data-light="day">☀ Day</button>
+              <button class="hud-pill" data-light="sunset">🌅 Sunset</button>
+              <button class="hud-pill" data-light="night">🌙 Night</button>
             </div>
           </div>
         </div>
+      </div>
 
-        <!-- Panel 3: Bedroom — Real Photo -->
-        <div class="gallery-panel" id="gp-2">
-          <img class="gallery-panel-img"
-            src="https://images.unsplash.com/photo-1618219908412-a29a1bb7b86e?auto=format&fit=crop&w=1920&q=80"
-            alt="Nilayaa Master Penthouse Suite — floating platform bed, nubuck leather"
-            loading="lazy"
-          />
-          <div class="gallery-panel-info">
-            <div class="panel-title-block">
-              <div class="panel-room-title">Master Penthouse Suite</div>
-              <div class="panel-room-sub">Floating Platform Bed · Italian Nubuck · Brass Underglow LED</div>
-            </div>
-            <div class="panel-hud">
-              <div class="hud-row">
-                <button class="hud-pill active" data-light="day">☀ Day</button>
-                <button class="hud-pill" data-light="sunset">🌅 Sunset</button>
-                <button class="hud-pill" data-light="night">🌙 Night</button>
-              </div>
+      <!-- Panel 3: Bedroom — Real Photo -->
+      <div class="gallery-panel" id="gp-2">
+        <img class="gallery-panel-img"
+          src="https://images.unsplash.com/photo-1618219908412-a29a1bb7b86e?auto=format&fit=crop&w=1920&q=80"
+          alt="Nilayaa Master Penthouse Suite — floating platform bed, nubuck leather"
+          loading="lazy"
+        />
+        <div class="gallery-panel-info">
+          <div class="panel-title-block">
+            <div class="panel-room-title">Master Penthouse Suite</div>
+            <div class="panel-room-sub">Floating Platform Bed · Italian Nubuck · Brass Underglow LED</div>
+          </div>
+          <div class="panel-hud">
+            <div class="hud-row">
+              <button class="hud-pill active" data-light="day">☀ Day</button>
+              <button class="hud-pill" data-light="sunset">🌅 Sunset</button>
+              <button class="hud-pill" data-light="night">🌙 Night</button>
             </div>
           </div>
         </div>
+      </div>
 
-        <!-- Panel 4: Office — Real Photo -->
-        <div class="gallery-panel" id="gp-3">
-          <img class="gallery-panel-img"
-            src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1920&q=80"
-            alt="Nilayaa Executive Office Library — walnut desk, brass shelves"
-            loading="lazy"
-          />
-          <div class="gallery-panel-info">
-            <div class="panel-title-block">
-              <div class="panel-room-title">Executive Office Library</div>
-              <div class="panel-room-sub">American Walnut · Brass Shelving · Cognac Leather Chair</div>
-            </div>
-            <div class="panel-hud">
-              <div class="hud-row">
-                <button class="hud-pill active" data-light="day">☀ Day</button>
-                <button class="hud-pill" data-light="sunset">🌅 Sunset</button>
-                <button class="hud-pill" data-light="night">🌙 Night</button>
-              </div>
+      <!-- Panel 4: Office — Real Photo -->
+      <div class="gallery-panel" id="gp-3">
+        <img class="gallery-panel-img"
+          src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1920&q=80"
+          alt="Nilayaa Executive Office Library — walnut desk, brass shelves"
+          loading="lazy"
+        />
+        <div class="gallery-panel-info">
+          <div class="panel-title-block">
+            <div class="panel-room-title">Executive Office Library</div>
+            <div class="panel-room-sub">American Walnut · Brass Shelving · Cognac Leather Chair</div>
+          </div>
+          <div class="panel-hud">
+            <div class="hud-row">
+              <button class="hud-pill active" data-light="day">☀ Day</button>
+              <button class="hud-pill" data-light="sunset">🌅 Sunset</button>
+              <button class="hud-pill" data-light="night">🌙 Night</button>
             </div>
           </div>
         </div>
-
-      </div><!-- /gallery-track -->
-    </div><!-- /gallery-viewport -->
-  </div><!-- /gallery-sticky -->
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- ================================================================ SERVICES -->
