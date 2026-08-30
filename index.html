@@ -453,6 +453,18 @@
       margin-top: 64px;
       border-top: 1px solid var(--ink-4); border-left: 1px solid var(--ink-4);
     }
+    @media(max-width:768px) {
+      .facts-row {
+        grid-template-columns: 1fr !important;
+        margin-top: 36px !important;
+        border-left: none !important;
+        width: 100% !important;
+      }
+      .fact-cell {
+        padding: 24px 20px !important;
+        border-left: 1px solid var(--ink-4) !important;
+      }
+    }
     .fact-cell {
       border-right: 1px solid var(--ink-4); border-bottom: 1px solid var(--ink-4);
       padding: 36px 28px; background: var(--ink-2);
@@ -1063,7 +1075,7 @@
       </div>
       <div class="m-body">
         <h2 class="m-headline">
-          Crafted for those who believe<br/>their space should tell their <em>story</em>
+          Crafted for those who believe their space should tell their <em>story</em>
         </h2>
         <p class="m-text">
           We are architects, material scientists, and luxury craftspeople rooted in Basavanagudi — Bengaluru's cultural heartland. Every commission is a singular act of spatial storytelling, fusing Italian marble, smoked oak, burnished brass, and architectural restraint into environments that endure.
