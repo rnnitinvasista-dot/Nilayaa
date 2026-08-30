@@ -43,22 +43,29 @@
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { font-size: 16px; scroll-behavior: smooth; }
+    html {
+      font-size: 16px; scroll-behavior: smooth;
+      width: 100% !important; max-width: 100% !important; overflow-x: hidden !important;
+    }
     body {
       background: var(--ink);
       color: var(--cream);
       font-family: var(--ff-sans);
       font-weight: 300;
-      overflow-x: hidden;
+      width: 100% !important; max-width: 100% !important; overflow-x: hidden !important;
+      position: relative;
       -webkit-font-smoothing: antialiased;
     }
     a { color: inherit; text-decoration: none; }
-    img { display: block; }
+    img { display: block; max-width: 100%; }
     ::-webkit-scrollbar { width: 4px; }
     ::-webkit-scrollbar-track { background: var(--ink); }
     ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 2px; }
-    .container { width: 100%; max-width: 1400px; margin: 0 auto; padding: 0 48px; }
-    @media(max-width:768px) { .container { padding: 0 20px; } }
+    .container { width: 100%; max-width: 1400px; margin: 0 auto; padding: 0 48px; box-sizing: border-box; }
+    @media(max-width:768px) {
+      .container { padding: 0 16px !important; }
+      html, body { font-size: 15px; }
+    }
 
     /* =========================================================
        PRELOADER
@@ -247,22 +254,43 @@
       font-size: 0.65rem; letter-spacing: 0.28em; text-transform: uppercase;
       color: var(--gold); writing-mode: vertical-rl; transform: rotate(180deg);
     }
+    @media(max-width:900px) { .slide-room-label { display: none !important; } }
 
     /* HERO COPY */
     .hero-copy {
       position: absolute; bottom: 0; left: 0; right: 0; z-index: 20;
-      padding-bottom: 96px;
+      padding-bottom: 96px; width: 100%; box-sizing: border-box;
     }
     .hero-copy .container {
       display: grid;
       grid-template-columns: 1fr auto;
       align-items: flex-end;
-      gap: 40px;
+      gap: 40px; width: 100%; box-sizing: border-box;
     }
     @media(max-width:768px) {
-      .hero-copy { padding-bottom: 70px; }
-      .hero-copy .container { grid-template-columns: 1fr; }
-      .hero-right { display: none; }
+      .hero-copy { padding-bottom: 56px !important; width: 100% !important; left: 0 !important; right: 0 !important; }
+      .hero-copy .container {
+        display: flex !important; flex-direction: column !important;
+        align-items: flex-start !important; width: 100% !important; max-width: 100% !important;
+        padding: 0 16px !important; box-sizing: border-box !important;
+      }
+      .hero-right { display: none !important; }
+      .hero-eyebrow { font-size: 0.6rem !important; letter-spacing: 0.22em !important; margin-bottom: 8px !important; }
+      .hero-title {
+        font-size: clamp(1.8rem, 6.8vw, 2.8rem) !important;
+        line-height: 1.12 !important; max-width: 100% !important;
+        word-break: break-word !important;
+      }
+      .hero-ctas {
+        width: 100% !important; display: flex !important;
+        flex-direction: column !important; gap: 10px !important;
+        margin-top: 18px !important;
+      }
+      .btn-primary, .btn-outline {
+        width: 100% !important; text-align: center !important;
+        justify-content: center !important; display: flex !important;
+        box-sizing: border-box !important; padding: 13px 20px !important;
+      }
     }
     .hero-eyebrow {
       display: flex; align-items: center; gap: 14px;
@@ -341,11 +369,12 @@
        MARQUEE STRIP
        ========================================================= */
     .marquee-strip {
-      width: 100%; background: var(--gold); padding: 14px 24px;
-      overflow-x: auto; display: flex; justify-content: center;
+      width: 100%; max-width: 100%; background: var(--gold); padding: 12px 16px;
+      overflow: hidden; display: flex; justify-content: center; box-sizing: border-box;
     }
     .marquee-inner {
       display: flex; gap: 0; flex-wrap: wrap; justify-content: center; align-items: center;
+      max-width: 100%; box-sizing: border-box;
       animation: none !important; transform: none !important;
     }
     .marquee-item {
