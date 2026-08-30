@@ -1,0 +1,19 @@
+{
+  "name": "nilayaa-interiors-3d",
+  "version": "1.0.0",
+  "description": "Nilayaa Interiors - Luxury Interior Architecture & 3D Interactive Web Experience",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [
+    "interior-design",
+    "threejs",
+    "webgl",
+    "luxury-architecture",
+    "nilayaa-interiors",
+    "ui-ux-pro-max"
+  ],
+  "author": "Nilayaa Interiors",
+  "license": "ISC"
+}
