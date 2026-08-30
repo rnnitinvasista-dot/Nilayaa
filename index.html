@@ -107,44 +107,32 @@
        ========================================================= */
     .site-header {
       position: fixed; top: 0; left: 0; right: 0; z-index: 900;
-      padding: 26px 48px;
+      padding: 20px 48px;
       display: flex; align-items: center; justify-content: space-between;
-      transition: padding 0.4s, background 0.4s, backdrop-filter 0.4s, border-color 0.4s;
-      border-bottom: 1px solid transparent;
-      background: linear-gradient(to bottom, rgba(6,6,8,0.75) 0%, transparent 100%);
-    }
-    .site-header.scrolled {
-      padding: 16px 48px;
-      background: rgba(247,244,239,0.95);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-bottom-color: rgba(181,137,42,0.18);
+      background: rgba(8,8,12,0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
     }
     @media(max-width:768px) {
-      .site-header, .site-header.scrolled { padding: 18px 20px; }
+      .site-header { padding: 14px 16px !important; }
     }
     .nav-logo { display: flex; flex-direction: column; gap: 2px; }
     .nav-logo-name {
       font-family: var(--ff-serif);
       font-size: 1.6rem; font-weight: 400; letter-spacing: 0.3em;
       text-transform: uppercase; color: #ffffff; line-height: 1;
-      transition: color 0.3s;
     }
-    .site-header.scrolled .nav-logo-name { color: #1c1a16; }
     .nav-logo-sub {
       font-size: 0.6rem; letter-spacing: 0.28em;
       text-transform: uppercase; color: var(--gold-lt);
-      transition: color 0.3s;
     }
-    .site-header.scrolled .nav-logo-sub { color: var(--gold); }
     .nav-links { display: flex; gap: 2.4rem; list-style: none; }
     .nav-links a {
       font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase;
       color: rgba(255,255,255,0.9); font-weight: 400; transition: color 0.3s;
     }
     .nav-links a:hover { color: var(--gold-lt); }
-    .site-header.scrolled .nav-links a { color: #4a4640; }
-    .site-header.scrolled .nav-links a:hover { color: var(--gold); }
     @media(max-width:900px) { .nav-links { display: none; } }
     .nav-cta-btn {
       padding: 10px 26px; border: 1px solid var(--gold-lt);
@@ -153,14 +141,11 @@
       transition: all 0.3s;
     }
     .nav-cta-btn:hover { background: var(--gold-lt); color: #1c1a16; }
-    .site-header.scrolled .nav-cta-btn { border-color: var(--gold); color: var(--gold); }
-    .site-header.scrolled .nav-cta-btn:hover { background: var(--gold); color: var(--ink); }
     .hamburger-btn {
       display: none; flex-direction: column; gap: 5px;
       background: none; border: none; cursor: pointer; padding: 4px;
     }
     .hamburger-btn span { display: block; width: 22px; height: 1px; background: #ffffff; transition: 0.3s; }
-    .site-header.scrolled .hamburger-btn span { background: #1c1a16; }
     @media(max-width:900px) { .hamburger-btn { display: flex; } .nav-cta-btn { display: none; } }
 
     /* Mobile Menu */
@@ -168,15 +153,11 @@
       position: fixed; inset: 0; z-index: 880;
       background: var(--ink);
       display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3rem;
-      clip-path: circle(0% at calc(100% - 32px) 28px);
-      transition: clip-path 0.65s cubic-bezier(0.77,0,0.175,1);
-      pointer-events: none;
+      opacity: 0; pointer-events: none; transition: opacity 0.4s;
     }
-    .mobile-menu.open { clip-path: circle(150% at calc(100% - 32px) 28px); pointer-events: auto; }
+    .mobile-menu.open { opacity: 1; pointer-events: auto; }
     .mobile-menu a {
-      font-family: var(--ff-serif);
-      font-size: clamp(2rem, 6vw, 3.2rem);
-      font-weight: 300;
+      font-family: var(--ff-serif); font-size: 2rem; font-weight: 300;
       color: var(--cream);
       transition: color 0.3s;
     }
@@ -204,14 +185,16 @@
       position: absolute; inset: 0;
       width: 100%; height: 100%;
       opacity: 0;
-      transition: opacity 1.2s ease-in-out;
+      transition: opacity 1.0s ease-in-out;
       pointer-events: none;
       overflow: hidden;
+      z-index: 1;
       background: #08080c !important;
     }
     .hero-slide.active {
       opacity: 1;
       pointer-events: auto;
+      z-index: 2;
     }
 
     .hero-slide-img {

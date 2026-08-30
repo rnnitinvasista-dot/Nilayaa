@@ -55,14 +55,6 @@ function initEntryAnims() {
 }
 
 // ================================================================
-// HEADER SCROLL
-// ================================================================
-const siteHeader = document.getElementById('site-header');
-window.addEventListener('scroll', () => {
-  siteHeader.classList.toggle('scrolled', window.scrollY > 60);
-}, { passive: true });
-
-// ================================================================
 // MOBILE MENU
 // ================================================================
 const hambBtn = document.getElementById('hamburger-btn');
