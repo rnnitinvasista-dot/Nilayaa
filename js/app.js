@@ -385,22 +385,14 @@ document.getElementById('consultation-form')?.addEventListener('submit', e => {
 });
 
 // ================================================================
-// GSAP SCROLL ANIMATIONS
+// GSAP SCROLL ANIMATIONS (100% visible elements, subtle motion only)
 // ================================================================
-// Fade-up elements
 gsap.utils.toArray('.fact-cell, .proc-step').forEach((el, i) => {
   gsap.from(el, {
-    opacity: 0, y: 36, duration: 0.9,
-    delay: (i % 4) * 0.1,
-    ease: 'power3.out',
-    scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' }
-  });
-});
-
-gsap.utils.toArray('.m-body, .manifesto-sidebar').forEach(el => {
-  gsap.from(el, {
-    opacity: 0, y: 40, duration: 1.1, ease: 'power3.out',
-    scrollTrigger: { trigger: el, start: 'top 85%' }
+    y: 20, duration: 0.6,
+    delay: (i % 4) * 0.08,
+    ease: 'power2.out',
+    scrollTrigger: { trigger: el, start: 'top 92%', toggleActions: 'play none none none' }
   });
 });
 

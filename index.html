@@ -398,13 +398,18 @@
       width: 100%; max-width: 260px; height: 180px; object-fit: cover;
       border: 1px solid var(--ink-4); border-radius: 2px;
     }
-    .m-body {}
     .m-headline {
       font-family: var(--ff-serif);
-      font-size: clamp(2.2rem, 3.8vw, 3.8rem);
+      font-size: clamp(2.0rem, 3.8vw, 3.8rem);
       font-weight: 300; line-height: 1.15; color: var(--cream); margin-bottom: 36px;
+      word-wrap: break-word; overflow-wrap: break-word;
     }
     .m-headline em { font-style: italic; color: var(--gold); }
+    @media(max-width:768px) {
+      .m-headline { font-size: clamp(1.5rem, 5.5vw, 2.1rem); line-height: 1.25; margin-bottom: 24px; }
+      .m-headline br { display: none; }
+      .manifesto { padding: 60px 0; }
+    }
     .m-text { font-size: 1rem; line-height: 1.9; color: var(--ash); margin-bottom: 20px; max-width: 640px; }
     .facts-row {
       display: grid; grid-template-columns: repeat(3, 1fr);
@@ -544,13 +549,15 @@
     /* =========================================================
        BEFORE / AFTER
        ========================================================= */
-    .transformation { padding: 130px 0; background: var(--ink); }
+    .transformation { padding: 110px 0; background: var(--ink); }
+    @media(max-width:768px) { .transformation { padding: 60px 0; } }
     .ba-slider {
-      position: relative; max-width: 1200px; margin: 48px auto 0;
-      overflow: hidden; aspect-ratio: 16/8;
-      cursor: ew-resize; user-select: none;
-      border: 1px solid var(--ink-4);
+      position: relative; max-width: 1200px; margin: 44px auto 0;
+      overflow: hidden; aspect-ratio: 16/9;
+      cursor: ew-resize; user-select: none; touch-action: pan-y;
+      border: 1px solid var(--ink-4); width: 100%; box-sizing: border-box;
     }
+    @media(max-width:768px) { .ba-slider { aspect-ratio: 4/3; margin-top: 24px; } }
     .ba-img-before {
       position: absolute; inset: 0;
       background: url('https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
@@ -560,8 +567,8 @@
       position: absolute; top: 0; left: 0; bottom: 0; width: 50%; overflow: hidden;
     }
     .ba-img-after-inner {
-      position: absolute; inset: 0;
-      width: 100vw; max-width: 1200px; height: 100%;
+      position: absolute; top: 0; left: 0; height: 100%;
+      width: 100%;
       background: url('https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
     }
     .ba-line { position: absolute; top: 0; bottom: 0; left: 50%; width: 2px; background: var(--gold); transform: translateX(-50%); pointer-events: none; }
@@ -712,13 +719,14 @@
     /* =========================================================
        PROCESS
        ========================================================= */
-    .process { padding: 130px 0; background: var(--ink-2); }
+    .process { padding: 110px 0; background: var(--ink-2); }
+    @media(max-width:768px) { .process { padding: 60px 0; } }
     .process-steps {
       display: grid; grid-template-columns: repeat(4, 1fr);
-      margin-top: 72px;
+      margin-top: 56px;
       border-top: 1px solid var(--ink-4); border-left: 1px solid var(--ink-4);
     }
-    @media(max-width:768px) { .process-steps { grid-template-columns: 1fr 1fr; } }
+    @media(max-width:768px) { .process-steps { grid-template-columns: 1fr 1fr; margin-top: 36px; } }
     @media(max-width:500px) { .process-steps { grid-template-columns: 1fr; } }
     .proc-step {
       border-right: 1px solid var(--ink-4); border-bottom: 1px solid var(--ink-4);
@@ -726,8 +734,8 @@
     }
     .proc-step:hover { background: var(--ink-3); }
     .proc-n {
-      font-family: var(--ff-serif); font-size: 4.5rem; font-weight: 300;
-      color: rgba(255,255,255,0.04); line-height: 1; margin-bottom: 14px;
+      font-family: var(--ff-serif); font-size: 4rem; font-weight: 300;
+      color: var(--gold); opacity: 0.7; line-height: 1; margin-bottom: 14px;
     }
     .proc-icon {
       width: 42px; height: 42px; border: 1px solid rgba(201,168,76,0.3);
